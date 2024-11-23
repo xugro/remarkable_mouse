@@ -65,8 +65,8 @@ class reMarkable1:
     @property
     def pen(self):
         """(paramiko.ChannelFile) pen stream"""
-        cmd = f'dd bs=16 if={self.pen_file}'
-        return self.client.exec_command(cmd, bufsize=16, timeout=0)[1]
+        cmd = f'dd bs=24 if={self.pen_file}'
+        return self.client.exec_command(cmd, bufsize=24, timeout=0)[1]
 
     @property
     def touch(self):

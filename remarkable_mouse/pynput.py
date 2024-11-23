@@ -38,11 +38,12 @@ def read_tablet(rm, *, orientation, monitor_num, region, threshold, mode):
     stream = rm.pen
     while True:
         try:
-            data = stream.read(16)
+            data = stream.read(24)
         except TimeoutError:
             continue
 
-        e_time, e_millis, e_type, e_code, e_value = struct.unpack('2IHHi', data)
+        log.debug('unpacking data: "{}", len: {}'.format(data.hex(), len(data.hex())))
+        e_time, e_millis, e_type, e_code, e_value = struct.unpack('I4xI4xHHi', data)
 
         if log.level == logging.DEBUG:
             log_event(e_time, e_millis, e_type, e_code, e_value)
